@@ -1,6 +1,7 @@
 
 import * as path from "path";
 import { app, BrowserWindow, screen } from "electron";
+import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
 /******************************************************************************* */
 /**
@@ -24,6 +25,17 @@ const mainWindowWidth = 1200;
 const mainWindowHeight = 750;
 
 function createWindow () {
+
+  
+
+installExtension(REACT_DEVELOPER_TOOLS)
+.then((name) => console.log(`Added Extension:  ${name}`))
+.catch((err) => console.log('An error occurred: ', err));
+
+installExtension(REDUX_DEVTOOLS)
+.then((name) => console.log(`Added Extension:  ${name}`))
+.catch((err) => console.log('An error occurred: ', err));
+
   // 创建浏览器窗口。
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;

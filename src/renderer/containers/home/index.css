@@ -1,0 +1,6 @@
+/*
+ * Custom translucent site header
+ */
+.ui.menu {
+    border: 0 !important;
+}

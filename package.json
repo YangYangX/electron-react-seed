@@ -55,13 +55,13 @@
     "workbox-webpack-plugin": "3.6.3"
   },
   "scripts": {
-    "start":"yarn clean && concurrently \"yarn run build:watch\" \"yarn run electron:serve\"",
+    "start": "yarn clean && concurrently \"yarn run build:watch\" \"yarn run electron:serve\"",
     "web:start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "web:build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "build:watch": "cra-build-watch -v --react-scripts-version 2.1.3",
     "electron:serve": "yarn run electron:build:init && wait-on ./build/electron-react-seed/index.html && electron . --serve",
-    "electron:build:init": "copyfiles -f src/main/init.js build",
+    "electron:build:init": "tsc src/main/init.ts --types --outDir build",
     "clean": "rimraf build"
   },
   "eslintConfig": {
@@ -128,6 +128,7 @@
     "electron-packager": "^13.0.1",
     "electron-reload": "^1.4.0",
     "rimraf": "^2.6.3",
+    "typescript": "^3.3.1",
     "wait-on": "^3.2.0"
   }
 }

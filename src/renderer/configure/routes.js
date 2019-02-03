@@ -4,19 +4,19 @@
  *
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router'
 
 // Import containers
-import Home from '../containers/home';
-import Checkout from '../containers/checkout';
+import Home from '../containers/home'
+import Blank from '../containers/blank'
 
 const routes = (
     <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/blank" component={Blank} />
     </Switch>
-);
+)
 
-export default routes;
+export default routes

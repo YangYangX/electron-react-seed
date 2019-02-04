@@ -11,6 +11,8 @@ import Framework from './containers/framework';
 
 // Load UI framework CSS files
 import './App.css';
+
+import 'semantic-ui-css/semantic.min.css';
 import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 

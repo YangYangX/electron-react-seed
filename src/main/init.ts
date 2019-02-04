@@ -23,8 +23,8 @@ if (serve) {
 // 垃圾回收的时候，window对象将会自动的关闭
 let mainWindow = null;
 
-const mainWindowWidth = 1200;
-const mainWindowHeight = 800;
+const mainWindowMinWidth = 1280;
+const mainWindowMinHeight = 720;
 
 function createWindow() {
     installExtension(REACT_DEVELOPER_TOOLS)
@@ -40,10 +40,12 @@ function createWindow() {
     const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
     mainWindow = new BrowserWindow({
-        x: (size.width - mainWindowWidth) / 2,
-        y: (size.height - mainWindowHeight) / 2,
-        width: mainWindowWidth,
-        height: mainWindowHeight,
+        x: 0, //(size.width - mainWindowWidth) / 2,
+        y: 0, //(size.height - mainWindowHeight) / 2,
+        width: size.width,
+        height: size.height,
+        minWidth: mainWindowMinWidth,
+        minHeight: mainWindowMinHeight,
         show: false,
     });
 

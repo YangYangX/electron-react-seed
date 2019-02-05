@@ -11,9 +11,11 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import { push } from 'connected-react-router';
+import _ from 'lodash';
 
 // UI Framework
 import {
+    ResizeSensor,
     Alignment,
     Button,
     Classes,
@@ -30,15 +32,9 @@ import {
     NavbarHeading,
 } from '@blueprintjs/core';
 //import { Container, Row, Col } from 'react-grid-system';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Grid } from 'semantic-ui-react';
 
-import {
-    serviceIcon,
-    resourceIcon,
-    helpIcon,
-    logoAbout,
-    footerImg,
-} from '../../asserts';
+import { serviceIcon, resourceIcon, helpIcon, logoAbout } from '../../asserts';
 
 // Style
 import Styles from './style';
@@ -47,6 +43,10 @@ import Styles from './style';
 class Home extends Component {
     state = {
         isOpen: false,
+        size: {
+            width: 0,
+            height: 0,
+        },
     };
     /**
      * constructor function
@@ -132,40 +132,10 @@ class Home extends Component {
 
     render() {
         const { navTo } = this.props;
-
-        const action = (
-            <Button
-                className="appQuit"
-                icon="cross"
-                intent={'danger'}
-                style={Styles.quit}
-                onClick={() => {
-                    this.addToast({
-                        action: {
-                            onClick: () => alert('DEMO!'),
-                            text: '重试',
-                        },
-                        icon: 'warning-sign',
-                        intent: Intent.DANGER,
-                        message:
-                            '当前用户没有权限执行此操作.请联系系统管理员以获取适当权限.',
-                    });
-                }}
-            >
-                退出
-            </Button>
-        );
-        const description = (
-            <>
-                本项目暂时为空,
-                <br />
-                更多内容随后添加.
-            </>
-        );
-
+        console.log(this.state.size.height);
         return (
             <div style={Styles.screen}>
-                <Navbar>
+                <Navbar fixedToTop={true} style={Styles.navbar}>
                     <NavbarGroup align={Alignment.LEFT}>
                         <NavbarHeading>
                             <img src={logoAbout} style={Styles.logoNavbar} />
@@ -191,144 +161,194 @@ class Home extends Component {
                     </NavbarGroup>
                 </Navbar>
                 <Divider style={Styles.titleLine} />
-                <p style={Styles.editorTitle}>
-                    OSLC Adapter 设计器
-                    <span style={Styles.version}>{'版本号: 1.0.0.A'}</span>
-                </p>
+                <Grid style={Styles.container}>
+                    <Grid.Row
+                        verticalAlign="top"
+                        style={{ paddingBottom: '0px' }}
+                    >
+                        <Grid.Column width={3} style={Styles.side}>
+                            版本: 1.0.0.A
+                        </Grid.Column>
+                        <Grid.Column width={13} style={Styles.content}>
+                            <p style={Styles.editorTitle}>
+                                OSLC Adapter 设计器
+                            </p>
+                            <Grid>
+                                <Grid.Row>
+                                    <Grid.Column
+                                        width={8}
+                                        style={Styles.editorSection}
+                                    >
+                                        <Grid>
+                                            <Grid.Row>
+                                                <Grid.Column
+                                                    width={4}
+                                                    style={
+                                                        Styles.editorSectionIconContainer
+                                                    }
+                                                >
+                                                    <img
+                                                        src={serviceIcon}
+                                                        style={
+                                                            Styles.editorSectionIcon
+                                                        }
+                                                    />
+                                                </Grid.Column>
 
-                <Grid fluid style={Styles.container}>
-                    <Row>
-                        <Col sm={0} />
-                        <Col sm={12}>
-                            <Row>
-                                <Col sm={6} style={Styles.editorSection}>
-                                    <Row>
-                                        <Col
-                                            sm={4}
-                                            style={
-                                                Styles.editorSectionIconContainer
-                                            }
-                                        >
-                                            <img
-                                                src={serviceIcon}
-                                                style={Styles.editorSectionIcon}
-                                            />
-                                        </Col>
-                                        <Col sm={8}>
-                                            <p
-                                                style={
-                                                    Styles.editorSectionTitle
-                                                }
-                                            >
-                                                服务
-                                            </p>
-                                            <p style={Styles.editorSectionDesc}>
-                                                基于模型生成的Adapter原型。这里是一些占位符文字，随机文字随机文字随机文字.Lorem
-                                                ipsum是指一篇用于网页设计、排印、布局和印刷的伪拉丁文章.
-                                            </p>
-                                            <p>
-                                                <Button
-                                                    rightIcon={'arrow-right'}
-                                                    intent={Intent.PRIMARY}
+                                                <Grid.Column width={12}>
+                                                    <p
+                                                        style={
+                                                            Styles.editorSectionTitle
+                                                        }
+                                                    >
+                                                        服务
+                                                    </p>
+                                                    <p
+                                                        style={
+                                                            Styles.editorSectionDesc
+                                                        }
+                                                    >
+                                                        基于模型生成的Adapter原型。这里是一些占位符文字，随机文字随机文字随机文字.Lorem
+                                                        ipsum是指一篇用于网页设计、排印、布局和印刷的伪拉丁文章.
+                                                    </p>
+                                                    <p>
+                                                        <Button
+                                                            rightIcon={
+                                                                'arrow-right'
+                                                            }
+                                                            intent={
+                                                                Intent.PRIMARY
+                                                            }
+                                                            style={
+                                                                Styles.editorSectionBtn
+                                                            }
+                                                        >
+                                                            开始
+                                                        </Button>
+                                                    </p>
+                                                </Grid.Column>
+                                            </Grid.Row>
+                                        </Grid>
+                                    </Grid.Column>
+
+                                    <Grid.Column
+                                        width={8}
+                                        style={Styles.editorSection}
+                                    >
+                                        <Grid>
+                                            <Grid.Row>
+                                                <Grid.Column
+                                                    width={4}
                                                     style={
-                                                        Styles.editorSectionBtn
+                                                        Styles.editorSectionIconContainer
                                                     }
                                                 >
-                                                    开始
-                                                </Button>
-                                            </p>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                                <Col sm={6} style={Styles.editorSection}>
-                                    <Row>
-                                        <Col
-                                            sm={4}
-                                            style={
-                                                Styles.editorSectionIconContainer
-                                            }
-                                        >
-                                            <img
-                                                src={resourceIcon}
-                                                style={Styles.editorSectionIcon}
-                                            />
-                                        </Col>
-                                        <Col sm={8}>
-                                            <p
-                                                style={
-                                                    Styles.editorSectionTitle
-                                                }
-                                            >
-                                                资源
-                                            </p>
-                                            <p style={Styles.editorSectionDesc}>
-                                                基于模型生成的Adapter原型。这里是一些占位符文字，随机文字随机文字随机文字.它不是真实的.
-                                                这几个有异于拉丁文的字母
-                                            </p>
-                                            <p>
-                                                <Button
-                                                    rightIcon={'arrow-right'}
-                                                    intent={Intent.PRIMARY}
+                                                    <img
+                                                        src={resourceIcon}
+                                                        style={
+                                                            Styles.editorSectionIcon
+                                                        }
+                                                    />
+                                                </Grid.Column>
+
+                                                <Grid.Column width={12}>
+                                                    <p
+                                                        style={
+                                                            Styles.editorSectionTitle
+                                                        }
+                                                    >
+                                                        资源
+                                                    </p>
+                                                    <p
+                                                        style={
+                                                            Styles.editorSectionDesc
+                                                        }
+                                                    >
+                                                        基于模型生成的Adapter原型。这里是一些占位符文字，随机文字随机文字随机文字.Lorem
+                                                        ipsum是指一篇用于网页设计、排印、布局和印刷的伪拉丁文章.
+                                                    </p>
+                                                    <p>
+                                                        <Button
+                                                            rightIcon={
+                                                                'arrow-right'
+                                                            }
+                                                            intent={
+                                                                Intent.PRIMARY
+                                                            }
+                                                            style={
+                                                                Styles.editorSectionBtn
+                                                            }
+                                                        >
+                                                            开始
+                                                        </Button>
+                                                    </p>
+                                                </Grid.Column>
+                                            </Grid.Row>
+                                        </Grid>
+                                    </Grid.Column>
+                                </Grid.Row>
+
+                                <Grid.Row>
+                                    <Grid.Column
+                                        width={8}
+                                        style={Styles.editorSection}
+                                    >
+                                        <Grid>
+                                            <Grid.Row>
+                                                <Grid.Column
+                                                    width={4}
                                                     style={
-                                                        Styles.editorSectionBtn
+                                                        Styles.editorSectionIconContainer
                                                     }
                                                 >
-                                                    开始
-                                                </Button>
-                                            </p>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm={6} style={Styles.editorSection}>
-                                    <Row>
-                                        <Col
-                                            sm={4}
-                                            style={
-                                                Styles.editorSectionIconContainer
-                                            }
-                                        >
-                                            <img
-                                                src={helpIcon}
-                                                style={Styles.editorSectionIcon}
-                                            />
-                                        </Col>
-                                        <Col sm={8}>
-                                            <p
-                                                style={
-                                                    Styles.editorSectionTitle
-                                                }
-                                            >
-                                                帮助文档
-                                            </p>
-                                            <p style={Styles.editorSectionDesc}>
-                                                基于模型生成的Adapter原型。这里是一些占位符文字，随机文字随机文字随机文字.
-                                            </p>
-                                            <p>
-                                                <Button
-                                                    rightIcon={'arrow-right'}
-                                                    intent={Intent.PRIMARY}
-                                                    style={
-                                                        Styles.editorSectionBtn
-                                                    }
-                                                >
-                                                    开始
-                                                </Button>
-                                            </p>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12}>
-                            <img src={footerImg} style={Styles.footer} />
-                        </Col>
-                    </Row>
+                                                    <img
+                                                        src={helpIcon}
+                                                        style={
+                                                            Styles.editorSectionIcon
+                                                        }
+                                                    />
+                                                </Grid.Column>
+
+                                                <Grid.Column width={12}>
+                                                    <p
+                                                        style={
+                                                            Styles.editorSectionTitle
+                                                        }
+                                                    >
+                                                        帮助
+                                                    </p>
+                                                    <p
+                                                        style={
+                                                            Styles.editorSectionDesc
+                                                        }
+                                                    >
+                                                        基于模型生成的Adapter原型。这里是一些占位符文字，随机文字随机文字随机文字.Lorem
+                                                        ipsum是指一篇用于网页设计、排印、布局和印刷的伪拉丁文章.
+                                                    </p>
+                                                    <p>
+                                                        <Button
+                                                            rightIcon={
+                                                                'arrow-right'
+                                                            }
+                                                            intent={
+                                                                Intent.PRIMARY
+                                                            }
+                                                            style={
+                                                                Styles.editorSectionBtn
+                                                            }
+                                                        >
+                                                            开始
+                                                        </Button>
+                                                    </p>
+                                                </Grid.Column>
+                                            </Grid.Row>
+                                        </Grid>
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
+                        </Grid.Column>
+                    </Grid.Row>
                 </Grid>
-
                 {this._renderAboutDialog()}
             </div>
         );

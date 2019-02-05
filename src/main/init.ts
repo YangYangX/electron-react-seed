@@ -24,7 +24,7 @@ if (serve) {
 let mainWindow = null;
 
 const mainWindowMinWidth = 1280;
-const mainWindowMinHeight = 720;
+const mainWindowMinHeight = 800;
 
 function createWindow() {
     installExtension(REACT_DEVELOPER_TOOLS)
@@ -40,10 +40,10 @@ function createWindow() {
     const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
     mainWindow = new BrowserWindow({
-        x: 0, //(size.width - mainWindowWidth) / 2,
-        y: 0, //(size.height - mainWindowHeight) / 2,
-        width: size.width,
-        height: size.height,
+        x: (size.width - mainWindowMinWidth) / 2,
+        y: (size.height - mainWindowMinHeight) / 2,
+        width: mainWindowMinWidth,
+        height: mainWindowMinHeight,
         minWidth: mainWindowMinWidth,
         minHeight: mainWindowMinHeight,
         show: false,

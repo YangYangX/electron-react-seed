@@ -1,13 +1,19 @@
 import React from 'react';
 
-const menuBarHeight = 50;
-const containerBoxHeight = (window.innerHeight - 50) * 0.8;
+const navBarHeight = 50;
+const divider = 5;
+const title = 45;
+const containerBoxHeight = window.innerHeight - navBarHeight - divider;
 const containerFotterHeight = (window.innerHeight - 50) * 0.2;
 
 export default {
     screen: {},
     container: {
-        height: containerBoxHeight,
+        height: '100vh',
+        minHeight: '100vh',
+    },
+    navbar: {
+        height: '50px',
     },
     logoNavbar: {
         height: '45px',
@@ -18,13 +24,12 @@ export default {
     },
     version: {
         fontSize: 12,
-        marginLeft: '10px',
     },
     quit: {
         width: '250px',
     },
     titleLine: {
-        marginTop: '0px',
+        paddingTop: '45px',
         marginRight: '0px',
         marginLeft: '0px',
         marginBottom: '0px',
@@ -33,8 +38,10 @@ export default {
     editorTitle: {
         fontFamily: 'PingFang-SC-Regular',
         fontSize: 28,
-        margin: '20px',
+        paddingTop: '20px',
+        paddingBottom: '20px',
         textAlign: 'center',
+        height: '75px',
     },
     editorSectionIconContainer: {
         textAlign: 'center',
@@ -42,7 +49,6 @@ export default {
     },
     editorSectionIcon: {
         width: '128px',
-        height: '128px',
     },
     editorSectionTitle: {
         fontSize: 24,
@@ -57,11 +63,13 @@ export default {
     editorSectionDesc: {
         fontFamily: 'PingFang-SC-Light',
         fontSize: 14,
+        paddingLeft: '0px',
+        paddingRight: '25px',
         fontWeight: 'Regular',
-        height: '120px',
+        height: '80px',
     },
     editorSection: {
-        padding: '65px',
+        paddingLeft: '30px',
         paddingBottom: '30px',
     },
     aboutLogoContainer: {
@@ -75,8 +83,9 @@ export default {
         fontFamily: 'PingFang-SC-Bold',
         fontSize: 12,
     },
-    footer: {
-        width: '100%',
-        height: containerFotterHeight - 90,
+    side: {
+        minHeight: '100%',
+        backgroundColor: '#484d5e',
     },
+    content: {},
 };

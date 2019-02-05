@@ -4,7 +4,6 @@ export const serviceIcon = require('./images/service.png');
 export const resourceIcon = require('./images/resource.png');
 export const helpIcon = require('./images/help.png');
 export const logoAbout = require('./images/logo.png');
-export const footerImg = require('./images/fotter.png');
 
 /*
 export const assetImages = [

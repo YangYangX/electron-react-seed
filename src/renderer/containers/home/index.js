@@ -19,7 +19,7 @@ import {
     Alignment,
     Button,
     Classes,
-    NonIdealState,
+    Icon,
     Position,
     Intent,
     Toaster,
@@ -32,9 +32,15 @@ import {
     NavbarHeading,
 } from '@blueprintjs/core';
 //import { Container, Row, Col } from 'react-grid-system';
-import { Grid } from 'semantic-ui-react';
+import { Grid, List } from 'semantic-ui-react';
 
-import { serviceIcon, resourceIcon, helpIcon, logoAbout } from '../../asserts';
+import {
+    serviceIcon,
+    resourceIcon,
+    helpIcon,
+    logoAbout,
+    appIcon,
+} from '../../asserts';
 
 // Style
 import Styles from './style';
@@ -135,221 +141,96 @@ class Home extends Component {
         console.log(this.state.size.height);
         return (
             <div style={Styles.screen}>
-                <Navbar fixedToTop={true} style={Styles.navbar}>
-                    <NavbarGroup align={Alignment.LEFT}>
-                        <NavbarHeading>
-                            <img src={logoAbout} style={Styles.logoNavbar} />
-                        </NavbarHeading>
-                    </NavbarGroup>
-                    <NavbarGroup align={Alignment.RIGHT}>
-                        <Navbar.Divider />
+                <div>
+                    <Grid centered style={Styles.container}>
+                        <Grid.Row>
+                            <Grid.Column width={16}>
+                                <p style={Styles.appIconContainer}>
+                                    <img src={appIcon} style={Styles.appIcon} />
+                                </p>
+                            </Grid.Column>
 
-                        <Button
-                            className="bp3-minimal"
-                            icon="comment"
-                            text="报告问题"
-                        />
+                            <Grid.Column width={16}>
+                                <p style={Styles.appTitleContainer}>
+                                    OSLC Adapter 设计器
+                                </p>
+                                <p style={Styles.appSubTitleContainer}>
+                                    版本1.0.0.A
+                                </p>
+                            </Grid.Column>
+                            <Grid.Column
+                                width={4}
+                                style={Styles.actionContainer}
+                            >
+                                <List>
+                                    <List.Item>
+                                        <Button
+                                            style={Styles.actionButton}
+                                            alignText={Alignment.LEFT}
+                                            large={true}
+                                            minimal={true}
+                                            icon={'cube-add'}
+                                        >
+                                            创建新项目
+                                        </Button>
+                                    </List.Item>
+                                    <List.Item>
+                                        <Button
+                                            style={Styles.actionButton}
+                                            alignText={Alignment.LEFT}
+                                            large={true}
+                                            minimal={true}
+                                            icon={'document-open'}
+                                        >
+                                            打开项目
+                                        </Button>
+                                    </List.Item>
 
-                        <Button
-                            className="bp3-minimal"
-                            icon="info-sign"
-                            text="关于"
-                            onClick={() => {
-                                this.handleAboutOpen(true);
-                            }}
-                        />
-                    </NavbarGroup>
-                </Navbar>
-                <Divider style={Styles.titleLine} />
-                <Grid style={Styles.container}>
-                    <Grid.Row
-                        verticalAlign="top"
-                        style={{ paddingBottom: '0px' }}
-                    >
-                        <Grid.Column width={3} style={Styles.side}>
-                            版本: 1.0.0.A
-                        </Grid.Column>
-                        <Grid.Column width={13} style={Styles.content}>
-                            <p style={Styles.editorTitle}>
-                                OSLC Adapter 设计器
-                            </p>
-                            <Grid>
-                                <Grid.Row>
-                                    <Grid.Column
-                                        width={8}
-                                        style={Styles.editorSection}
+                                    <List.Item>
+                                        <Button
+                                            style={Styles.actionButton}
+                                            alignText={Alignment.LEFT}
+                                            large={true}
+                                            minimal={true}
+                                            icon={'lifesaver'}
+                                        >
+                                            帮助
+                                        </Button>
+                                    </List.Item>
+                                </List>
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row style={Styles.appFooterContainer}>
+                            <Grid.Column width={8}>
+                                <div style={Styles.appFooterLeftSection} />
+                            </Grid.Column>
+
+                            <Grid.Column width={8}>
+                                <div style={Styles.appFooterRightSection}>
+                                    <Button
+                                        alignText={Alignment.LEFT}
+                                        minimal={true}
+                                        icon={'cog'}
+                                        rightIcon={'chevron-down'}
+                                        small={true}
                                     >
-                                        <Grid>
-                                            <Grid.Row>
-                                                <Grid.Column
-                                                    width={4}
-                                                    style={
-                                                        Styles.editorSectionIconContainer
-                                                    }
-                                                >
-                                                    <img
-                                                        src={serviceIcon}
-                                                        style={
-                                                            Styles.editorSectionIcon
-                                                        }
-                                                    />
-                                                </Grid.Column>
-
-                                                <Grid.Column width={12}>
-                                                    <p
-                                                        style={
-                                                            Styles.editorSectionTitle
-                                                        }
-                                                    >
-                                                        服务
-                                                    </p>
-                                                    <p
-                                                        style={
-                                                            Styles.editorSectionDesc
-                                                        }
-                                                    >
-                                                        基于模型生成的Adapter原型。这里是一些占位符文字，随机文字随机文字随机文字.Lorem
-                                                        ipsum是指一篇用于网页设计、排印、布局和印刷的伪拉丁文章.
-                                                    </p>
-                                                    <p>
-                                                        <Button
-                                                            rightIcon={
-                                                                'arrow-right'
-                                                            }
-                                                            intent={
-                                                                Intent.PRIMARY
-                                                            }
-                                                            style={
-                                                                Styles.editorSectionBtn
-                                                            }
-                                                        >
-                                                            开始
-                                                        </Button>
-                                                    </p>
-                                                </Grid.Column>
-                                            </Grid.Row>
-                                        </Grid>
-                                    </Grid.Column>
-
-                                    <Grid.Column
-                                        width={8}
-                                        style={Styles.editorSection}
+                                        设置
+                                    </Button>
+                                    <Button
+                                        alignText={Alignment.LEFT}
+                                        minimal={true}
+                                        icon={'cog'}
+                                        rightIcon={'chevron-down'}
+                                        small={true}
                                     >
-                                        <Grid>
-                                            <Grid.Row>
-                                                <Grid.Column
-                                                    width={4}
-                                                    style={
-                                                        Styles.editorSectionIconContainer
-                                                    }
-                                                >
-                                                    <img
-                                                        src={resourceIcon}
-                                                        style={
-                                                            Styles.editorSectionIcon
-                                                        }
-                                                    />
-                                                </Grid.Column>
-
-                                                <Grid.Column width={12}>
-                                                    <p
-                                                        style={
-                                                            Styles.editorSectionTitle
-                                                        }
-                                                    >
-                                                        资源
-                                                    </p>
-                                                    <p
-                                                        style={
-                                                            Styles.editorSectionDesc
-                                                        }
-                                                    >
-                                                        基于模型生成的Adapter原型。这里是一些占位符文字，随机文字随机文字随机文字.Lorem
-                                                        ipsum是指一篇用于网页设计、排印、布局和印刷的伪拉丁文章.
-                                                    </p>
-                                                    <p>
-                                                        <Button
-                                                            rightIcon={
-                                                                'arrow-right'
-                                                            }
-                                                            intent={
-                                                                Intent.PRIMARY
-                                                            }
-                                                            style={
-                                                                Styles.editorSectionBtn
-                                                            }
-                                                        >
-                                                            开始
-                                                        </Button>
-                                                    </p>
-                                                </Grid.Column>
-                                            </Grid.Row>
-                                        </Grid>
-                                    </Grid.Column>
-                                </Grid.Row>
-
-                                <Grid.Row>
-                                    <Grid.Column
-                                        width={8}
-                                        style={Styles.editorSection}
-                                    >
-                                        <Grid>
-                                            <Grid.Row>
-                                                <Grid.Column
-                                                    width={4}
-                                                    style={
-                                                        Styles.editorSectionIconContainer
-                                                    }
-                                                >
-                                                    <img
-                                                        src={helpIcon}
-                                                        style={
-                                                            Styles.editorSectionIcon
-                                                        }
-                                                    />
-                                                </Grid.Column>
-
-                                                <Grid.Column width={12}>
-                                                    <p
-                                                        style={
-                                                            Styles.editorSectionTitle
-                                                        }
-                                                    >
-                                                        帮助
-                                                    </p>
-                                                    <p
-                                                        style={
-                                                            Styles.editorSectionDesc
-                                                        }
-                                                    >
-                                                        基于模型生成的Adapter原型。这里是一些占位符文字，随机文字随机文字随机文字.Lorem
-                                                        ipsum是指一篇用于网页设计、排印、布局和印刷的伪拉丁文章.
-                                                    </p>
-                                                    <p>
-                                                        <Button
-                                                            rightIcon={
-                                                                'arrow-right'
-                                                            }
-                                                            intent={
-                                                                Intent.PRIMARY
-                                                            }
-                                                            style={
-                                                                Styles.editorSectionBtn
-                                                            }
-                                                        >
-                                                            开始
-                                                        </Button>
-                                                    </p>
-                                                </Grid.Column>
-                                            </Grid.Row>
-                                        </Grid>
-                                    </Grid.Column>
-                                </Grid.Row>
-                            </Grid>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-                {this._renderAboutDialog()}
+                                        设置
+                                    </Button>
+                                </div>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                    {this._renderAboutDialog()}
+                </div>
             </div>
         );
     }

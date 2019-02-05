@@ -7,70 +7,51 @@ const containerBoxHeight = window.innerHeight - navBarHeight - divider;
 const containerFotterHeight = (window.innerHeight - 50) * 0.2;
 
 export default {
-    screen: {},
-    container: {
+    screen: {
         height: '100vh',
         minHeight: '100vh',
     },
-    navbar: {
-        height: '50px',
+    container: {
+        padding: '20px 0 0 0',
     },
-    logoNavbar: {
-        height: '45px',
+    appIconContainer: {
+        textAlign: 'center',
+    },
+    appIcon: {
+        width: '128px',
+        height: '128px',
+    },
+    appTitleContainer: {
+        textAlign: 'center',
+        fontFamily: 'PingFang-SC-Regular',
+        fontSize: 32,
+        marginBottom: 0,
+    },
+    appSubTitleContainer: {
+        textAlign: 'center',
+        fontFamily: 'PingFang-SC-Light',
+        fontSize: 20,
+    },
+    appFooterContainer: {
+        marginTop: '35px',
+    },
+    appFooterLeftSection: {
+        textAlign: 'left',
+        marginLeft: '25px',
+    },
+    appFooterRightSection: {
+        textAlign: 'right',
+        marginRight: '25px',
     },
     AboutDialog: {
         fontFamily: 'PingFang-SC-Regular',
         width: '600px',
     },
-    version: {
-        fontSize: 12,
+    actionContainer: {
+        marginTop: '50px',
     },
-    quit: {
-        width: '250px',
-    },
-    titleLine: {
-        paddingTop: '45px',
-        marginRight: '0px',
-        marginLeft: '0px',
-        marginBottom: '0px',
-        borderBottom: '5px solid #01579B',
-    },
-    editorTitle: {
-        fontFamily: 'PingFang-SC-Regular',
-        fontSize: 28,
-        paddingTop: '20px',
-        paddingBottom: '20px',
-        textAlign: 'center',
-        height: '75px',
-    },
-    editorSectionIconContainer: {
-        textAlign: 'center',
-        verticalAlign: 'middle',
-    },
-    editorSectionIcon: {
-        width: '128px',
-    },
-    editorSectionTitle: {
-        fontSize: 24,
-        fontFamily: 'PingFang-SC-Regular',
-    },
-    editorSectionBtn: {
-        height: '45px',
-        width: '120px',
-        fontSize: 16,
-        fontFamily: 'PingFang-SC-Regular',
-    },
-    editorSectionDesc: {
-        fontFamily: 'PingFang-SC-Light',
-        fontSize: 14,
-        paddingLeft: '0px',
-        paddingRight: '25px',
-        fontWeight: 'Regular',
-        height: '80px',
-    },
-    editorSection: {
-        paddingLeft: '30px',
-        paddingBottom: '30px',
+    actionButton: {
+        width: window.innerWidth / 3,
     },
     aboutLogoContainer: {
         textAlign: 'center',
@@ -83,9 +64,4 @@ export default {
         fontFamily: 'PingFang-SC-Bold',
         fontSize: 12,
     },
-    side: {
-        minHeight: '100%',
-        backgroundColor: '#484d5e',
-    },
-    content: {},
 };

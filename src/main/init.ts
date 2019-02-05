@@ -23,8 +23,8 @@ if (serve) {
 // 垃圾回收的时候，window对象将会自动的关闭
 let mainWindow = null;
 
-const mainWindowMinWidth = 1280;
-const mainWindowMinHeight = 800;
+const mainWindowMinWidth = 750;
+const mainWindowMinHeight = 550;
 
 function createWindow() {
     installExtension(REACT_DEVELOPER_TOOLS)

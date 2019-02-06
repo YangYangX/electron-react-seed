@@ -34,13 +34,7 @@ import {
 //import { Container, Row, Col } from 'react-grid-system';
 import { Grid, List } from 'semantic-ui-react';
 
-import {
-    serviceIcon,
-    resourceIcon,
-    helpIcon,
-    logoAbout,
-    appIcon,
-} from '../../asserts';
+import { logoAbout, appIcon } from '../../asserts';
 
 // Style
 import Styles from './style';
@@ -138,7 +132,7 @@ class Home extends Component {
 
     render() {
         const { navTo } = this.props;
-        console.log(this.state.size.height);
+
         return (
             <div style={Styles.screen}>
                 <div>

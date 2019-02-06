@@ -23,8 +23,8 @@ if (serve) {
 // 垃圾回收的时候，window对象将会自动的关闭
 let mainWindow = null;
 
-const mainWindowMinWidth = 750;
-const mainWindowMinHeight = 550;
+const mainWindowMinWidth = 1280;
+const mainWindowMinHeight = 800;
 
 function createWindow() {
     installExtension(REACT_DEVELOPER_TOOLS)
@@ -59,7 +59,22 @@ function createWindow() {
     }
 
     // 然后加载应用的 index.html。
-    mainWindow.loadFile(path.join(__dirname, 'electron-react-seed/index.html'));
+
+    let url = require('url').format({
+        protocol: 'file',
+        slashes: true,
+        pathname: path.join(__dirname, 'electron-react-seed/index.html'),
+    });
+
+    mainWindow.loadURL(url, {
+        postData: [
+            {
+                type: 'rawData',
+                bytes: Buffer.from('hello=world'),
+            },
+        ],
+        extraHeaders: 'Content-Type: application/x-www-form-urlencoded',
+    });
 
     // 打开开发者工具
     mainWindow.webContents.openDevTools();

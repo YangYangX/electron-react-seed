@@ -9,7 +9,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { push } from 'connected-react-router';
+import { withRouter } from 'react-router-dom';
 // Import routes
 import routes from '../../configure/routes';
 
@@ -17,7 +18,6 @@ import routes from '../../configure/routes';
 
 // Class Framework, basic component for application
 class Framework extends Component {
-
     /**
      * constructor function
      * @param {*} props
@@ -26,23 +26,20 @@ class Framework extends Component {
         super(props);
     }
 
-    render() {
-        return (
-            <div>
-                {routes}
-            </div>
-        )
+    componentWillMount() {
+        console.log(this.props);
     }
 
+    render() {
+        return <div>{routes}</div>;
+    }
 }
 
 // Default props
-Framework.defaultProps = {
-};
+Framework.defaultProps = {};
 
 // Prop attributes types
-Framework.propTypes = {
-};
+Framework.propTypes = {};
 
 /**
  * mapStateToProps is a function provided to pull data from the store when it changes,
@@ -59,10 +56,19 @@ const mapStateToProps = state => ({});
  *
  * @param {*} dispatch
  */
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = dispatch => ({
+    navTo: location => dispatch(push(location)),
+});
 
 // Connect Switch to store to pass location down to each Routes.
 // const ConnectedSwitch = connect(mapStateToProps)(Switch);
 
 // Export Framework container
-export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(Framework);
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps,
+        null,
+        { pure: false }
+    )(Framework)
+);

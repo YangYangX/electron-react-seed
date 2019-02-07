@@ -2,7 +2,7 @@
 
 export const logoAbout = require('./images/logo.png');
 export const appIcon = require('./images/icon.png');
-
+export const docIcon = require('./images/doc.png');
 /*
 export const assetImages = [
     require('./images/service.png'),

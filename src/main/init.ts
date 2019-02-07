@@ -22,7 +22,7 @@ if (serve) {
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
 let mainWindow = null;
-
+const appRootPath = path.join(__dirname, 'electron-react-seed/index.html');
 const mainWindowMinWidth = 1280;
 const mainWindowMinHeight = 800;
 
@@ -40,10 +40,10 @@ function createWindow() {
     const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
     mainWindow = new BrowserWindow({
-        x: (size.width - mainWindowMinWidth) / 2,
-        y: (size.height - mainWindowMinHeight) / 2,
-        width: mainWindowMinWidth,
-        height: mainWindowMinHeight,
+        x: 0,
+        y: 3, //Fix: always show some spaces on top will make the window looking nicer.
+        width: size.width,
+        height: size.height,
         minWidth: mainWindowMinWidth,
         minHeight: mainWindowMinHeight,
         show: false,
@@ -60,21 +60,14 @@ function createWindow() {
 
     // 然后加载应用的 index.html。
 
-    let url = require('url').format({
-        protocol: 'file',
+    let addnewprojectUrl = require('url').format({
+        protocol: 'file:',
         slashes: true,
-        pathname: path.join(__dirname, 'electron-react-seed/index.html'),
+        hash: 'addnewproject',
+        pathname: appRootPath,
     });
 
-    mainWindow.loadURL(url, {
-        postData: [
-            {
-                type: 'rawData',
-                bytes: Buffer.from('hello=world'),
-            },
-        ],
-        extraHeaders: 'Content-Type: application/x-www-form-urlencoded',
-    });
+    mainWindow.loadURL(addnewprojectUrl);
 
     // 打开开发者工具
     mainWindow.webContents.openDevTools();

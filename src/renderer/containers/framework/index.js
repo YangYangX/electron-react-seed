@@ -26,9 +26,7 @@ class Framework extends Component {
         super(props);
     }
 
-    componentWillMount() {
-        console.log(this.props);
-    }
+    componentWillMount() {}
 
     render() {
         return <div>{routes}</div>;

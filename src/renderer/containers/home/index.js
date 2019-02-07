@@ -31,7 +31,7 @@ import {
     NavbarGroup,
     NavbarHeading,
 } from '@blueprintjs/core';
-//import { Container, Row, Col } from 'react-grid-system';
+
 import { Grid, List } from 'semantic-ui-react';
 
 import { logoAbout, appIcon } from '../../asserts';

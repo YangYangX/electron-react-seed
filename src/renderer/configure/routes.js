@@ -12,13 +12,15 @@ import { Route, Switch } from 'react-router';
 import Home from '../containers/home';
 import Blank from '../containers/blank';
 import AddNewProject from '../containers/addNewProject';
+import Editor from '../containers/editor';
 
 const routes = (
-    <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/blank" component={Blank} />
-        <Route exact path="/addnewproject" component={AddNewProject} />
-    </Switch>
+  <Switch>
+    <Route exact path="/" component={Home} />
+    <Route exact path="/blank" component={Blank} />
+    <Route exact path="/addnewproject" component={AddNewProject} />
+    <Route exact path="/editor" component={Editor} />
+  </Switch>
 );
 
 export default routes;

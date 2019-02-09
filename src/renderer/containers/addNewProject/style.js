@@ -19,9 +19,10 @@ export default {
     height: window.innerHeight + 14,
   },
 
-  AboutDialog: {
+  createNewProjectDialog: {
     fontFamily: 'PingFang-SC-Regular',
-    width: '600px',
+    width: window.innerWidth * 0.65,
+    height: contentHeight * 0.8,
   },
   aboutLogoContainer: {
     textAlign: 'center',
@@ -79,8 +80,12 @@ export default {
     marginRight: '10px',
     marginTop: contentHeight * 0.075,
   },
-  mainSectionContentContainer: {},
+  mainSectionContentContainer: {
+    margin: 0,
+  },
   mainSectionContent: {
+    margin: 0,
+    backgroundColor: '#fff',
     height: contentHeight * 0.8,
   },
   mainSectionSideBar: {

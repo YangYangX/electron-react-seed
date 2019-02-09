@@ -52,6 +52,9 @@ import { appIcon, logoAbout, docIcon } from '../../asserts';
 // Style
 import Styles from './style';
 
+// Components
+import AddNewProject from '../addNewProject';
+
 // Class Home, basic component for application
 class Editor extends Component {
   state = {
@@ -189,7 +192,14 @@ class Editor extends Component {
 
   FileMenu = () => (
     <Menu>
-      <MenuItem icon="folder-new" text="新建..." shouldDismissPopover={false} />
+      <MenuItem
+        icon="folder-new"
+        text="新建..."
+        shouldDismissPopover={false}
+        onClick={() => {
+          this.props.navTo('/addnewproject');
+        }}
+      />
       <MenuItem
         icon="panel-stats"
         text="所有项目"
@@ -406,6 +416,7 @@ class Editor extends Component {
           </Grid.Row>
         </Grid>
         {this._renderAboutDialog()}
+        <AddNewProject isOpen={true} />
       </div>
     );
   }

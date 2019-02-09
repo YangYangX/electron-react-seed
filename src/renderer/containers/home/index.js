@@ -4,15 +4,9 @@
  *
  * This component is the home page not found page.
  */
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// eslint-disable-next-line
-/*eslint-disable no-underscore-dangle */
-const { ipcRenderer } = window.require('electron');
-/*eslint-enable */
-import { Link } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import _ from 'lodash';
 
@@ -41,6 +35,8 @@ import { logoAbout, appIcon } from '../../asserts';
 
 // Style
 import Styles from './style';
+
+const { ipcRenderer } = window.require('electron');
 
 // Class Home, basic component for application
 class Home extends Component {

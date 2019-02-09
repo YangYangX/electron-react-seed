@@ -38,7 +38,7 @@ export default {
     height: '45px',
   },
   leftSection: {
-    backgroundColor: '#ebedf0',
+    backgroundColor: '#2c353c',
     height: contentHeight,
     borderRight: '1px solid #999',
     paddingRight: '0px',
@@ -109,17 +109,24 @@ export default {
     fontSize: 16,
   },
   workAreaMain: {
-    margin: '1rem 1rem 0 0rem',
     height: contentHeight,
-    borderBottom: '1px solid #999',
-    overflow: 'auto',
     backgroundColor: '#fff',
   },
-  workAreaDesc: {
-    margin: '0rem 1rem 0 0rem',
-    height: contentHeight * 0.25,
-    backgroundColor: '#fff',
-    paddingTop: 0,
+  workAreaMainTop: {
+    height: contentHeight * 0.3,
+    paddingLeft: '1rem',
+    paddingRight: '2rem',
+  },
+  workAreaMainTop1: {
+    height: contentHeight * 0.1,
+  },
+  workAreaMainTop2: {
+    height: contentHeight * 0.4,
+  },
+  workAreaMainTable: {
+    height: contentHeight * 0.5,
+    paddingLeft: '1rem',
+    paddingRight: '2rem',
   },
   workAreaAction: {
     margin: '0 0 0 -0.5rem',
@@ -168,4 +175,12 @@ export default {
     margin: 0,
     overflow: 'auto',
   },
+  workAreaTitle: {
+    paddingTop: '1rem',
+    paddingBottom: '1rem',
+    fontFamily: 'PingFang-SC-Regular',
+    color: '#182026',
+    fontSize: 30,
+  },
+  dataTable: {},
 };

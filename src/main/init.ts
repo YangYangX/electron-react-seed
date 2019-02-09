@@ -75,6 +75,7 @@ function createWelcomeWindow() {
     height: welcomeWindowMinHeight,
     maximizable: false,
     show: false,
+    title: 'OSLC Adapter 设计器',
   });
 
   welcomeWindow.once('ready-to-show', () => {
@@ -123,6 +124,7 @@ function createMainWindow() {
     minWidth: mainWindowMinWidth,
     minHeight: mainWindowMinHeight,
     show: false,
+    title: 'OSLC Adapter 设计器',
   });
 
   mainWindow.once('ready-to-show', () => {
@@ -166,7 +168,7 @@ function createMainWindow() {
 // 创建浏览器窗口时，调用这个函数。
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', () => {
-  createWelcomeWindow();
+  createMainWindow();
 });
 
 // 当全部窗口关闭时退出。

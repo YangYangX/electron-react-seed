@@ -18,6 +18,7 @@ import {
   Classes,
   Alignment,
   Button,
+  ButtonGroup,
   Alert,
   Icon,
   Card,
@@ -45,19 +46,28 @@ import {
 } from '@blueprintjs/core';
 import { ItemRenderer, MultiSelect } from '@blueprintjs/select';
 
-import { Grid, Button as SemanticButton, Tab } from 'semantic-ui-react';
+import {
+  Grid,
+  Button as SemanticButton,
+  Table,
+  Form,
+  Label as Status,
+  Icon as SemanticIcon,
+} from 'semantic-ui-react';
 
 import { appIcon, logoAbout, docIcon } from '../../asserts';
 
 // Style
 import Styles from './style';
+import { INTENT_DANGER } from '@blueprintjs/core/lib/esm/common/classes';
 
 // Class Home, basic component for application
-class Editor extends Component {
+class AllProjects extends Component {
   state = {
     shareProjectalert: false,
     loginAlert: false,
     aboutDialogOpen: false,
+    deleteAlert: false,
   };
   selectedProject = 'oslcBlankProject';
   selectedProjectDesc =
@@ -118,10 +128,36 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this._renderAboutDialog = this._renderAboutDialog.bind(this);
-    this.FileMenu = this.FileMenu.bind(this);
   }
 
   componentDidMount() {}
+
+  _renderDeleteProjectAlert = () => {
+    return (
+      <Alert
+        canEscapeKeyCancel={false}
+        canOutsideClickCancel={false}
+        cancelButtonText="取消"
+        confirmButtonText="删除"
+        icon="trash"
+        intent={Intent.DANGER}
+        isOpen={this.state.deleteAlert}
+        onCancel={this.handleDeleteCancel}
+        onConfirm={this.handleDeleteConfirm}
+      >
+        <p>确定要将项目 "测试项目" 移除吗?</p>
+      </Alert>
+    );
+  };
+
+  handleDeleteCancel = () => {
+    this.setState({ deleteAlert: false });
+  };
+
+  handleDeleteConfirm = () => {
+    this.setState({ deleteAlert: false });
+  };
+
   _renderAboutDialog = () => {
     return (
       <Dialog
@@ -189,14 +225,18 @@ class Editor extends Component {
 
   FileMenu = () => (
     <Menu>
-      <MenuItem icon="folder-new" text="新建..." shouldDismissPopover={false} />
+      <MenuItem
+        icon="folder-new"
+        text="新建..."
+        shouldDismissPopover={false}
+        onClick={() => {
+          this.props.navTo('/addnewproject');
+        }}
+      />
       <MenuItem
         icon="panel-stats"
         text="所有项目"
         shouldDismissPopover={false}
-        onClick={() => {
-          this.props.navTo('/allprojects');
-        }}
       />
       <MenuItem
         icon="folder-shared"
@@ -299,106 +339,112 @@ class Editor extends Component {
 
         <Grid centered style={Styles.container}>
           <Grid.Row>
-            <Grid.Column width={3} style={Styles.leftSection}>
-              <Tab
-                grid={{ paneWidth: 12, tabWidth: 6 }}
-                panes={[
-                  {
-                    menuItem: {
-                      key: 'service',
-                      icon: 'file code outline',
-                      content: '服务',
-                    },
-                    render: () => (
-                      <Tab.Pane as="div" style={Styles.tabContent}>
-                        <Tree
-                          contents={this.INITIAL_STATE}
-                          onNodeCollapse={this.handleNodeCollapse}
-                          onNodeExpand={this.handleNodeExpand}
-                        />
-                      </Tab.Pane>
-                    ),
-                  },
-                  {
-                    menuItem: {
-                      key: 'resource',
-                      icon: 'file alternate outline',
-                      content: '资源',
-                    },
-                    render: () => (
-                      <Tab.Pane as="div" style={Styles.tabContent}>
-                        TODO: 资源列表
-                      </Tab.Pane>
-                    ),
-                  },
-                ]}
-              />
-            </Grid.Column>
+            <Grid.Column width={3} style={Styles.leftSection} />
             <Grid.Column width={13} style={Styles.mainSection}>
               <Grid>
                 <Grid.Row style={Styles.workAreaMain}>
-                  <Grid.Column
-                    width={16}
-                    style={Styles.mainSectionTitleContainer}
-                  >
-                    <span style={Styles.mainSectionTitle}>设置</span>
-                    <Divider />
-                    <br />
-                    <Callout
-                      intent={Intent.WARNING}
-                      title={'提示信息'}
-                      icon="info-sign"
-                    >
-                      放置一些提示信息， 放置一些提示信息， 放置一些提示信息，
-                      放置一些提示信息， 放置一些提示信息， 放置一些提示信息，
-                      放置一些提示信息， 放置一些提示信息， 放置一些提示信息，
-                      放置一些提示信息， 放置一些提示信息， 放置一些提示信息，
-                    </Callout>
-                    <br />
-                    <FormGroup
-                      helperText="Service名称."
-                      label="Service名称"
-                      labelFor="text-input"
-                      labelInfo="(*必须)"
-                    >
-                      <InputGroup id="text-input" placeholder="Service1" />
-                    </FormGroup>
-                    <FormGroup
-                      helperText="Service ID是由系统自动生成的唯一标识码."
-                      label="Service ID"
-                      labelFor="text-input"
-                      labelInfo="(*必须)"
-                    >
-                      <InputGroup
-                        disabled={true}
-                        id="text-input"
-                        placeholder="Service ca716a9e-747b-48ed-89b2-10f53753875d"
-                      />
-                    </FormGroup>
-                    <FormGroup
-                      helperText="Service相关字段."
-                      label="Service其他字段"
-                      labelFor="text-input"
-                      labelInfo=""
-                    >
-                      <InputGroup id="text-input" placeholder="其他字段" />
-                    </FormGroup>
-                    <Divider />
-                    <Label>一组选项：</Label>
-                    <Checkbox>某个选项1</Checkbox>
-                    <Checkbox>某个选项2</Checkbox>
-                    <Checkbox>某个选项3</Checkbox>
-                    <Checkbox>某个选项4</Checkbox>
-                    <Divider />
-                    <Label>资源:</Label>
+                  <Grid.Column width={16} style={Styles.workAreaMainTop}>
+                    <Grid>
+                      <Grid.Row>
+                        <Grid.Column
+                          width={8}
+                          style={Styles.workAreaMainTopHalf}
+                        >
+                          <p style={Styles.workAreaTitle}>项目列表</p>
+                        </Grid.Column>
 
-                    <br />
-                    <div style={{ textAlign: 'right' }}>
-                      <Button intent={Intent.SUCCESS} icon="floppy-disk">
-                        保存
-                      </Button>
-                    </div>
-                    <br />
+                        <Grid.Column
+                          width={8}
+                          style={Styles.workAreaMainTop1}
+                        />
+                        <Grid.Column width={16} style={Styles.workAreaMainTop2}>
+                          <Divider />
+                          <br />
+
+                          <Form>
+                            <Form.Group widths="equal">
+                              <Form.Input
+                                fluid
+                                label="项目ID"
+                                placeholder="项目ID"
+                              />
+                              <Form.Input
+                                fluid
+                                label="项目名称"
+                                placeholder="项目名称"
+                              />
+                            </Form.Group>
+                            <Form.Group inline>
+                              <label>在线状态</label>
+                              <Form.Radio label="本地项目" value="offline" />
+                              <Form.Radio label="在线项目" value="online" />
+                            </Form.Group>
+                            <Form.Button color={'green'}>
+                              <SemanticIcon name="filter" />
+                              查找
+                            </Form.Button>
+                          </Form>
+
+                          <br />
+                          <Divider />
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
+                  </Grid.Column>
+                  <Grid.Column width={16} style={Styles.workAreaMainTable}>
+                    <Table celled selectable style={Styles.dataTable}>
+                      <Table.Header>
+                        <Table.Row>
+                          <Table.HeaderCell width={1}>在线</Table.HeaderCell>
+                          <Table.HeaderCell width={4}>项目ID</Table.HeaderCell>
+                          <Table.HeaderCell width={6}>
+                            项目名称
+                          </Table.HeaderCell>
+                          <Table.HeaderCell width={3}>
+                            更新时间
+                          </Table.HeaderCell>
+                          <Table.HeaderCell width={2}>操作</Table.HeaderCell>
+                        </Table.Row>
+                      </Table.Header>
+
+                      <Table.Body>
+                        <Table.Row>
+                          <Table.Cell textAlign={'center'}>
+                            <Status circular color={'red'} empty />
+                          </Table.Cell>
+                          <Table.Cell>
+                            71a15d1b-1b09-4bec-9de7-0202160c19f3
+                          </Table.Cell>
+                          <Table.Cell>测试项目</Table.Cell>
+                          <Table.Cell>2019-02-10 08:00:00</Table.Cell>
+                          <Table.Cell>
+                            <ButtonGroup
+                              fill={false}
+                              alignText={Alignment.CENTER}
+                            >
+                              <Button
+                                icon="document-open"
+                                intent={Intent.SUCCESS}
+                                onClick={() => {
+                                  this.props.navTo('/editor');
+                                }}
+                              >
+                                打开
+                              </Button>
+                              <Button
+                                icon="trash"
+                                intent={Intent.DANGER}
+                                onClick={() => {
+                                  this.setState({ deleteAlert: true });
+                                }}
+                              >
+                                删除
+                              </Button>
+                            </ButtonGroup>
+                          </Table.Cell>
+                        </Table.Row>
+                      </Table.Body>
+                    </Table>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
@@ -406,16 +452,17 @@ class Editor extends Component {
           </Grid.Row>
         </Grid>
         {this._renderAboutDialog()}
+        {this._renderDeleteProjectAlert()}
       </div>
     );
   }
 }
 
 // Default props
-Editor.defaultProps = {};
+AllProjects.defaultProps = {};
 
 // Prop attributes types
-Editor.propTypes = {};
+AllProjects.propTypes = {};
 
 /**
  * mapStateToProps is a function provided to pull data from the store when it changes,
@@ -442,4 +489,4 @@ export default connect(
   mapDispatchToProps,
   null,
   { pure: false }
-)(Editor);
+)(AllProjects);
